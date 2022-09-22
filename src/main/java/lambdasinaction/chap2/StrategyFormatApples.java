@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 策略模式实现
+ *
+ * 缺点：要为不同的策略创建一个实现类
  */
 public class StrategyFormatApples {
     interface AppleFormatter {

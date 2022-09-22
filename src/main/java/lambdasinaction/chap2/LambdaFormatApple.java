@@ -6,15 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 匿名类实现
- *
- * 优点：不用创建那些可能只使用一次的类了
- * 缺点：不清晰，不好理解
- * 
  * @author youngzy
  * @since 2022-09-22
  */
-public class AnonymousFormatApple {
+public class LambdaFormatApple {
     interface AppleFormatter {
         String accept(Apple apple);
     }
@@ -28,26 +23,22 @@ public class AnonymousFormatApple {
 
     public static void main(String[] args) {
         List<Apple> inventory = Arrays.asList(
-                new Apple(80,"green"),
+                new Apple(80, "green"),
                 new Apple(155, "green"),
                 new Apple(120, "red"));
 
         System.out.println("::fancy::");
-        prettyPrintApple(inventory, new AppleFormatter() {
-            @Override
-            public String accept(Apple apple) {
-                String characteristic = apple.getWeight() > 150 ? "heavy" : "light";
-                return "A " + characteristic + " " + apple.getColor() + " apple";
-            }
-        });
+        prettyPrintApple(inventory, (Apple apple) -> {
+                    String characteristic = apple.getWeight() > 150 ? "heavy" : "light";
+                    return "A " + characteristic + " " + apple.getColor() + " apple";
+                }
+        );
 
         System.out.println();
         System.out.println("==simple==");
-        prettyPrintApple(inventory, new AppleFormatter() {
-            @Override
-            public String accept(Apple apple) {
-                return "An apple of " + apple.getWeight() + "g";
-            }
-        });
+        prettyPrintApple(inventory, (Apple apple) -> {
+                    return "An apple of " + apple.getWeight() + "g";
+                }
+        );
     }
 }
