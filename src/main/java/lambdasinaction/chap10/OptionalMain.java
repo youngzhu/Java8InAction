@@ -16,11 +16,12 @@ public class OptionalMain {
 
     Car porsche = new Car();
     Car benz = new Car();
+    Car bmw = new Car();
 
     Person zhangsan = new Person();
     Person lisi = new Person();
     Person wang2 = new Person();
-
+    Person wang5 = new Person();
 
     @Before
     public void init() {
@@ -31,6 +32,9 @@ public class OptionalMain {
 
         lisi.addCar(benz);
         benz.addInsurance(pingan);
+
+        wang5.addCar(bmw);
+        bmw.addInsurance(cpic);
     }
 
     public String getCarInsuranceName(Optional<Person> person) {
@@ -47,6 +51,7 @@ public class OptionalMain {
         assertEquals("Unknown", getCarInsuranceName(of(zhangsan)));
         assertEquals("PingAn", getCarInsuranceName(of(lisi)));
         assertEquals("Unknown", getCarInsuranceName(of(wang2)));
+        assertEquals("CPIC", getCarInsuranceName(of(wang5)));
     }
 
     public Set<String> getCarInsuranceNames(List<Person> persons) {
@@ -56,5 +61,12 @@ public class OptionalMain {
                       .map(optInsurance -> optInsurance.map(Insurance::getName))
                       .flatMap(Optional::stream)
                       .collect(toSet());
+    }
+
+    @Test
+    public void testGetCarInsuranceNames() {
+        List<Person> personList = Arrays.asList(zhangsan, lisi, wang2, wang5);
+
+        System.out.println(getCarInsuranceNames(personList));
     }
 }
