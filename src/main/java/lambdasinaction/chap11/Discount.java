@@ -6,7 +6,11 @@ import static lambdasinaction.chap11.Util.format;
 public class Discount {
 
     public enum Code {
-        NONE(0), SILVER(5), GOLD(10), PLATINUM(15), DIAMOND(20);
+        NONE(0),
+        SILVER(5),
+        GOLD(10),
+        PLATINUM(15),
+        DIAMOND(20);
 
         private final int percentage;
 
